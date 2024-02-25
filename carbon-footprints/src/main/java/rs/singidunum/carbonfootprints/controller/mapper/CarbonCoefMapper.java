@@ -5,6 +5,8 @@ import org.springframework.stereotype.Service;
 import rs.singidunum.carbonfootprints.dto.response.CarbonCoefResponseDto;
 import rs.singidunum.carbonfootprints.model.CarbonCoef;
 
+import java.util.List;
+
 @Service
 public class CarbonCoefMapper {
 
@@ -17,9 +19,12 @@ public class CarbonCoefMapper {
 
     public CarbonCoefResponseDto mapToCarbonCoefResponseDto(CarbonCoef carbonCoef) {
         return CarbonCoefResponseDto.builder()
-                .id(carbonCoef.getId())
-                .name(carbonCoef.getName())
-                .coef(carbonCoef.getCoef())
-                .user(userMapper.mapToUserResponseDto(carbonCoef.getUser())).build();
+                                    .id(carbonCoef.getId())
+                                    .name(carbonCoef.getName())
+                                    .coef(carbonCoef.getCoef()).build();
+    }
+
+    public List<CarbonCoefResponseDto> mapToCarbonCoefResponseDtoList(List<CarbonCoef> carbonCoefList) {
+        return carbonCoefList.stream().map(this::mapToCarbonCoefResponseDto).toList();
     }
 }

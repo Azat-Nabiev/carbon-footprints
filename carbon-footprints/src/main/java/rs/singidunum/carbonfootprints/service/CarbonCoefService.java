@@ -9,8 +9,8 @@ public interface CarbonCoefService {
 
     List<CarbonCoef> getAllByUserId(Long id);
     List<CarbonCoef> getAll();
-    CarbonCoef add(CarbonCoefRequestDto carbonCoefRequestDto);
-    CarbonCoef edit(Long id, CarbonCoefRequestDto carbonCoefRequestDto);
+    CarbonCoef add(Long userId, CarbonCoefRequestDto carbonCoefRequestDto);
+    CarbonCoef edit(Long id, Long userId, CarbonCoefRequestDto carbonCoefRequestDto);
     CarbonCoef delete(Long id);
 
 }
