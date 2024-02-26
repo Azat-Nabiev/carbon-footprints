@@ -1,5 +1,6 @@
 package rs.singidunum.carbonfootprints.controller;
 
+import io.swagger.v3.oas.annotations.Operation;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -28,18 +29,21 @@ public class CarbonCoefController {
     private final CarbonCoefMapper carbonCoefMapper;
 
     @GetMapping
+    @Operation(summary = "Retrieving all ACTIVE carbon coefs")
     public ResponseEntity<List<CarbonCoefResponseDto>> retrieveAll() {
         List<CarbonCoef> carbonCoefList = carbonCoefService.getAll();
         return ResponseEntity.ok(carbonCoefMapper.mapToCarbonCoefResponseDtoList(carbonCoefList));
     }
 
     @GetMapping("/{id}")
+    @Operation(summary = "Retrieving all ACTIVE carbon coefs by user id")
     public ResponseEntity<List<CarbonCoefResponseDto>> retrieveAllByUserId(@PathVariable(name = "id") Long userId) {
         List<CarbonCoef> carbonCoefList = carbonCoefService.getAllByUserId(userId);
         return ResponseEntity.ok(carbonCoefMapper.mapToCarbonCoefResponseDtoList(carbonCoefList));
     }
 
     @PostMapping
+    @Operation(summary = "Adding an carbon coefs")
     public ResponseEntity<CarbonCoefResponseDto> add(@RequestHeader(name = "USER_ID") Long userId,
                                                      @RequestBody CarbonCoefRequestDto carbonCoefRequestDto) {
         CarbonCoef carbonCoef = carbonCoefService.add(userId, carbonCoefRequestDto);
@@ -47,6 +51,7 @@ public class CarbonCoefController {
     }
 
     @PutMapping("/{id}")
+    @Operation(summary = "Updating an carbon coefs by user id")
     public ResponseEntity<CarbonCoefResponseDto> edit(@PathVariable(name = "id") Long coefId,
                                                       @RequestHeader(name = "USER_ID") Long userId,
                                                       @RequestBody CarbonCoefRequestDto carbonCoefRequestDto) {
@@ -55,6 +60,7 @@ public class CarbonCoefController {
     }
 
     @DeleteMapping("/{id}")
+    @Operation(summary = "Deleting an carbon coefs by user id")
     public ResponseEntity<CarbonCoefResponseDto> delete(@PathVariable(name = "id") Long coefId) {
 
         CarbonCoef carbonCoef = carbonCoefService.delete(coefId);

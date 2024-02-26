@@ -39,8 +39,7 @@ public class AddressMapper {
                 .postalCode(address.getPostalCode())
                 .users(mapToUsersList(address.getUsers()))
                 .buildingType(address.getBuildingType().toString())
-                .status(address.getStatus().toString())
-                .carbon(mapToCarbonResponseDto(address.getCarbon())).build();
+                .status(address.getStatus().toString()).build();
     }
 
     public List<UserResponseDto> mapToUsersList(List<User> users) {

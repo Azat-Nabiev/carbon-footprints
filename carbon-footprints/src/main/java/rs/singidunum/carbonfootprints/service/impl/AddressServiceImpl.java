@@ -37,6 +37,7 @@ public class AddressServiceImpl implements AddressService {
     @Transactional
     public Address add(AddressRequestDto addressRequestDto) {
         Address address = mapToPm(addressRequestDto);
+        address.setStatus(EntityStatus.ACTIVE);
         return addressRepository.save(address);
     }
 
