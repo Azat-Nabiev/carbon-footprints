@@ -73,6 +73,7 @@ public class AddressServiceImpl implements AddressService {
                 .house(addressRequestDto.getHouse())
                 .flat(addressRequestDto.getFlat())
                 .postalCode(addressRequestDto.getPostalCode())
+                .buildingType(addressRequestDto.getBuildingType())
                       .build();
     }
 }

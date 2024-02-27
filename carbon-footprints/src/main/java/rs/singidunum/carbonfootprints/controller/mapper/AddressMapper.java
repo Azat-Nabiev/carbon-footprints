@@ -37,7 +37,7 @@ public class AddressMapper {
                 .house(address.getHouse())
                 .flat(address.getFlat())
                 .postalCode(address.getPostalCode())
-                .users(mapToUsersList(address.getUsers()))
+                .users(address.getUsers() != null ? mapToUsersList(address.getUsers()) : null)
                 .buildingType(address.getBuildingType().toString())
                 .status(address.getStatus().toString()).build();
     }

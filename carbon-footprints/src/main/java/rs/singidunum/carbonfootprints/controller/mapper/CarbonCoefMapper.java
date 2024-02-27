@@ -21,7 +21,8 @@ public class CarbonCoefMapper {
         return CarbonCoefResponseDto.builder()
                                     .id(carbonCoef.getId())
                                     .name(carbonCoef.getName())
-                                    .coef(carbonCoef.getCoef()).build();
+                                    .coef(carbonCoef.getCoef())
+                                    .status(carbonCoef.getStatus().toString()).build();
     }
 
     public List<CarbonCoefResponseDto> mapToCarbonCoefResponseDtoList(List<CarbonCoef> carbonCoefList) {

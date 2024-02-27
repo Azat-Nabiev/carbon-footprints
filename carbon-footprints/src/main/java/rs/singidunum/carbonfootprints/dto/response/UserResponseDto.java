@@ -13,8 +13,4 @@ public class UserResponseDto {
     private String lastName;
     private String email;
     private String password;
-    private LocalDateTime createdDate;
-    private List<CarbonResponseDto> carbons;
-    private List<CarbonCoefResponseDto> carbonCoefs;
-    private List<AddressResponseDto> addresses;
 }

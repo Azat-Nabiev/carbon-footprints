@@ -44,7 +44,7 @@ public class CarbonCoefController {
 
     @PostMapping
     @Operation(summary = "Adding an carbon coefs")
-    public ResponseEntity<CarbonCoefResponseDto> add(@RequestHeader(name = "USER_ID") Long userId,
+    public ResponseEntity<CarbonCoefResponseDto> add(@RequestHeader(name = "USER_ID", required = false) Long userId,
                                                      @RequestBody CarbonCoefRequestDto carbonCoefRequestDto) {
         CarbonCoef carbonCoef = carbonCoefService.add(userId, carbonCoefRequestDto);
         return ResponseEntity.ok(carbonCoefMapper.mapToCarbonCoefResponseDto(carbonCoef));

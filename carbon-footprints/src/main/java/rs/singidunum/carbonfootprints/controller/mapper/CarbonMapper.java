@@ -9,6 +9,8 @@ import rs.singidunum.carbonfootprints.model.Address;
 import rs.singidunum.carbonfootprints.model.Carbon;
 import rs.singidunum.carbonfootprints.model.CarbonCoef;
 
+import java.util.List;
+
 @Service
 public class CarbonMapper {
 
@@ -17,6 +19,10 @@ public class CarbonMapper {
     @Autowired
     public void setUserMapper(UserMapper userMapper) {
         this.userMapper = userMapper;
+    }
+
+    public List<CarbonResponseDto> mapToCarbonResponseDtoList(List<Carbon> carbonList) {
+        return carbonList.stream().map(this::mapToCarbonResponseDto).toList();
     }
 
     public CarbonResponseDto mapToCarbonResponseDto(Carbon carbon) {

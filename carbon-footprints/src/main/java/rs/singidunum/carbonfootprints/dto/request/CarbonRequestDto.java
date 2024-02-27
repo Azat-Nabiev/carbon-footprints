@@ -6,6 +6,7 @@ import lombok.Data;
 @Data
 @Builder
 public class CarbonRequestDto {
-    private CarbonCoefRequestDto coef;
+    private Long addressId;
+    private Long carbonCoefId;
     private Long amount;
 }
