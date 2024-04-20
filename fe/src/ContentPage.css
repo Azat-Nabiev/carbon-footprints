@@ -1,0 +1,95 @@
+.content-page {
+    display: flex;
+    justify-content: space-between;
+}
+
+.book-list {
+    flex: 1;
+    margin-right: 20px;
+}
+
+.books {
+    max-height: 500px;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.book-item {
+    background-color: #add8e6; /* Light blue background */
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    font-family: 'Georgia', serif; /* Pretty font */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.book-item p {
+    margin: 0;
+    font-family: 'Georgia', serif;
+    color: #333;
+}
+
+.form-container {
+    width: 300px; /* Adjust width as needed */
+    margin-top: calc(10px + 60px); /* Adjust 60px to match the height of the book item */
+}
+
+
+.book-form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.book-form > label {
+    display: flex;
+    flex-direction: column;
+    font-size: 16px;
+}
+
+.book-form > label > input {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin-top: 5px;
+    font-family: 'Georgia', serif;
+    font-size: 14px;
+}
+
+.book-form > button {
+    padding: 10px;
+    background-color: #1a73e8;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-family: 'Georgia', serif;
+    font-size: 16px;
+    transition: background-color 0.3s;
+}
+
+.book-form > button:hover {
+    background-color: #0c47a1;
+}
+
+.delete-button {
+    padding: 5px 10px;
+    background-color: #ff6347; /* Tomato red background for the delete button */
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 12px; /* Smaller font size for the button */
+}
+
+.delete-btn:hover {
+    background-color: #ff3b3b; /* Darker red on hover */
+}
