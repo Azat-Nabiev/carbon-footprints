@@ -4,7 +4,6 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import rs.singidunum.carbonfootprints.dto.request.CarbonCoefRequestDto;
 import rs.singidunum.carbonfootprints.dto.request.CarbonRequestDto;
 import rs.singidunum.carbonfootprints.model.Address;
 import rs.singidunum.carbonfootprints.model.Carbon;
@@ -18,6 +17,7 @@ import rs.singidunum.carbonfootprints.repository.UserRepository;
 import rs.singidunum.carbonfootprints.service.CarbonService;
 import rs.singidunum.carbonfootprints.service.mediator.CarbonMediator;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Service
@@ -30,6 +30,9 @@ public class CarbonServiceImpl implements CarbonService {
     private final AddressRepository addressRepository;
     private final CarbonCoefRepository carbonCoefRepository;
     private final CarbonMediator carbonMediator;
+
+    // CARBON_DIOXIDE_CONVERSATION_FACTOR = 44/12
+    private static final Double CARBON_DIOXIDE_CONVERSATION_FACTOR = 3.7;
 
     @Override
     @Transactional(readOnly = true)
@@ -69,7 +72,8 @@ public class CarbonServiceImpl implements CarbonService {
         carbon.setCoef(carbonCoef);
         carbon.setUser(user);
         carbon.setStatus(EntityStatus.ACTIVE);
-        carbon.setProduced(countProducedCarbon(carbonCoef.getCoef(), carbon.getAmount()));
+        carbon.setLastUpdated(LocalDateTime.now());
+        carbon.setProduced(countProducedCarbon(carbonCoef, carbon.getAmount()));
 
         carbonRepository.save(carbon);
         return carbon;
@@ -100,9 +104,9 @@ public class CarbonServiceImpl implements CarbonService {
                      .amount(carbonRequestDto.getAmount())
                      .build();
     }
-
-
-    private Long countProducedCarbon(Double coef, Long amount) {
-        return Math.round(coef * amount);
+    // E = M * K1 * NCV * K2 * 44/12
+    private Double countProducedCarbon(CarbonCoef carbonCoef, Double amount) {
+        return Math.ceil(amount * carbonCoef.getCef() * carbonCoef.getCoc()
+                * carbonCoef.getNcv() * CARBON_DIOXIDE_CONVERSATION_FACTOR);
     }
 }

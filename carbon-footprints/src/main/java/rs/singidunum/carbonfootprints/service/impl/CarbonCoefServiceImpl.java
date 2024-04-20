@@ -79,7 +79,6 @@ public class CarbonCoefServiceImpl implements CarbonCoefService {
     private CarbonCoef mapToCarbomCoef(CarbonCoefRequestDto carbonCoefRequestDto) {
         return CarbonCoef.builder()
                          .name(carbonCoefRequestDto.getName())
-                         .coef(carbonCoefRequestDto.getCoef())
                          .build();
     }
 }

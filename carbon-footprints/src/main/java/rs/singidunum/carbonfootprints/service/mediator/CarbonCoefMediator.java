@@ -15,10 +15,6 @@ public class CarbonCoefMediator {
             carbonCoef.setName(carbonCoefRequestDto.getName());
         }
 
-        if (carbonCoefRequestDto.getCoef() != null) {
-            carbonCoef.setCoef(carbonCoefRequestDto.getCoef());
-        }
-
         return carbonCoef;
     }
 

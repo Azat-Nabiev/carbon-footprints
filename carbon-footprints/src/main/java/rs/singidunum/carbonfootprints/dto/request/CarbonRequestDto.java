@@ -8,5 +8,10 @@ import lombok.Data;
 public class CarbonRequestDto {
     private Long addressId;
     private Long carbonCoefId;
-    private Long amount;
+    private Double amount;
+
+    //TONS/KG
+    private String weightType;
+
+    //TODO: check project
 }

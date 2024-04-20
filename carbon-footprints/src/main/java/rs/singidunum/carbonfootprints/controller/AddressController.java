@@ -19,7 +19,6 @@ import rs.singidunum.carbonfootprints.model.Address;
 import rs.singidunum.carbonfootprints.service.AddressService;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/api/v1/address")

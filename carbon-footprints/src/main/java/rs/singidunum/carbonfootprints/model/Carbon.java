@@ -43,8 +43,11 @@ public class Carbon {
     @JoinColumn(name = "coef_id")
     private CarbonCoef coef;
 
+    /**
+     * TONS
+     */
     @Column(name = "amount")
-    private Long amount;
+    private Double amount;
 
     @Column(name = "last_upd")
     private LocalDateTime lastUpdated;
@@ -53,7 +56,7 @@ public class Carbon {
     private EntityStatus status;
 
     @Column(name = "produced")
-    private Long produced;
+    private Double produced;
 
     @Override
     public boolean equals(Object o) {

@@ -12,6 +12,7 @@ public class CarbonResponseDto {
     private UserResponseDto user;
     private AddressResponseDto address;
     private CarbonCoefResponseDto coef;
-    private Long amount;
+    private Double amount;
     private LocalDateTime lastUpdated;
+    private Double produced;
 }

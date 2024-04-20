@@ -32,14 +32,17 @@ public class CarbonMapper {
                 .address(mapToCompactAddressResponseDto(carbon.getAddress()))
                 .coef(mapToCompactCarbonCoefResponse(carbon.getCoef()))
                 .amount(carbon.getAmount())
-                .lastUpdated(carbon.getLastUpdated()).build();
+                .lastUpdated(carbon.getLastUpdated())
+                .produced(carbon.getProduced())
+                                .build();
     }
 
 
     private CarbonCoefResponseDto mapToCompactCarbonCoefResponse(CarbonCoef carbonCoef) {
         return CarbonCoefResponseDto.builder()
                 .id(carbonCoef.getId()).name(carbonCoef.getName())
-                                    .coef(carbonCoef.getCoef()).build();
+                .cef(carbonCoef.getCef()).coc(carbonCoef.getCoc())
+                                    .ncv(carbonCoef.getNcv()).build();
     }
 
     private AddressResponseDto mapToCompactAddressResponseDto(Address address) {
@@ -50,8 +53,9 @@ public class CarbonMapper {
                 .street(address.getStreet())
                 .house(address.getHouse())
                 .flat(address.getFlat())
+                .postalCode(address.getPostalCode())
+                .buildingType(address.getBuildingType().toString())
+                .status(address.getStatus().toString())
                                  .build();
     }
-
-    //TODO: create custom mapper for address
 }
