@@ -1,0 +1,12 @@
+.web-header {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 60px;
+    background: #48bb78;
+    color: #333;
+    font-size: 24px;
+    font-weight: bold;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    padding-right: 1250px;
+}

@@ -1,0 +1,56 @@
+/* This stays the same as your previous pages for consistency */
+.page-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #edf2f7;
+}
+
+/* This will be the container for the user profile, styled similarly to the registration container */
+.profile-container {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    max-width: 400px;
+    width: 100%;
+    margin: auto;
+    padding: 40px;
+    border-radius: 8px;
+    background-color: #f0f9f4;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+}
+
+/* Similar to .register-title, but for the profile heading */
+.profile-title {
+    font-size: 24px;
+    color: #276749;
+    margin-bottom: 24px;
+}
+
+
+/* Style for each info item, similar to .register-input but as a <p> tag */
+.info-item {
+    margin-bottom: 15px; /* Adds a little space between each info item */
+    font-size: 16px;
+}
+.user-info {
+    background-color: white;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    text-align: left; /* Aligns all text to the left */
+}
+
+.info-label {
+    display: inline-block; /* Adjust as needed */
+    font-weight: bold;
+    margin-right: 5px;
+    color: #276749;
+}
+
+.info-value {
+    color: #333;
+    display: inline; /* Darker text for better readability */
+}
+
+/* You might not need button styles if there's no button, but they're here if needed */

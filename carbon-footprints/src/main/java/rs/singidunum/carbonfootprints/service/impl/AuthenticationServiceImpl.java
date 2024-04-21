@@ -15,6 +15,7 @@ import rs.singidunum.carbonfootprints.controller.dto.request.RegisterRequest;
 import rs.singidunum.carbonfootprints.controller.dto.response.AuthenticationResponse;
 import rs.singidunum.carbonfootprints.model.Token;
 import rs.singidunum.carbonfootprints.model.User;
+import rs.singidunum.carbonfootprints.model.enums.EntityStatus;
 import rs.singidunum.carbonfootprints.model.enums.Role;
 import rs.singidunum.carbonfootprints.model.enums.TokenType;
 import rs.singidunum.carbonfootprints.repository.TokenRepository;
@@ -23,6 +24,7 @@ import rs.singidunum.carbonfootprints.service.AuthenticationService;
 import rs.singidunum.carbonfootprints.service.JwtService;
 
 import java.io.IOException;
+import java.time.LocalDateTime;
 
 @Service
 @RequiredArgsConstructor
@@ -43,6 +45,8 @@ public class AuthenticationServiceImpl implements AuthenticationService {
                        .email(request.getEmail())
                        .password(passwordEncoder.encode(request.getPassword()))
                        .role(Role.USER)
+                       .status(EntityStatus.ACTIVE)
+                       .createdDate(LocalDateTime.now())
                        .build();
         var savedUser = repository.save(user);
         var jwtToken = jwtService.generateToken(user);

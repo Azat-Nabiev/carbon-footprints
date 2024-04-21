@@ -3,7 +3,7 @@ class AuthService {
 
     static async register(email, password, firstName, lastName, navigate) {
         try {
-            const response = await fetch(`${this.API_BASE_URL}/api/v1/user/register`, {
+            const response = await fetch(`${this.API_BASE_URL}/api/v1/auth/register`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -25,7 +25,7 @@ class AuthService {
 
     static async login(email, password, navigate) {
         try {
-            const response = await fetch(`${this.API_BASE_URL}/api/v1/user/authenticate`, {
+            const response = await fetch(`${this.API_BASE_URL}/api/v1/auth/authenticate`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -36,7 +36,7 @@ class AuthService {
             if (response.ok) {
                 this.storeTokens(data.access_token, data.refresh_token);
                 localStorage.setItem('userId', data.userId);
-                navigate(`/content/${data.userId}`);
+                navigate(`/user/profile/${data.userId}`);
             } else {
                 console.error('Login failed:', data.message);
                 return { error: true, message: data.message };
@@ -84,10 +84,10 @@ class AuthService {
         }
     }
 
-    static async getContent(userId) {
+    static async getUserProfileInfo(userId) {
         let accessToken = this.getAccessToken();
         try {
-            let response = await fetch(`${this.API_BASE_URL}/api/v1/content/${userId}`, {
+            let response = await fetch(`${this.API_BASE_URL}/api/v1/user/${userId}`, {
                 method: 'GET',
                 headers: {
                     'Content-Type': 'application/json',
@@ -98,7 +98,7 @@ class AuthService {
             if (response.status === 401) {
                 accessToken = await this.refreshToken();
                 if (accessToken) {
-                    response = await fetch(`${this.API_BASE_URL}/api/v1/content/${userId}`, {
+                    response = await fetch(`${this.API_BASE_URL}/api/v1/user/${userId}`, {
                         headers: {
                             'Authorization': `Bearer ${accessToken}`,
                         },
