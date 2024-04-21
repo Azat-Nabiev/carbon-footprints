@@ -2,7 +2,7 @@ package rs.singidunum.carbonfootprints.controller.mapper;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import rs.singidunum.carbonfootprints.dto.response.CarbonCoefResponseDto;
+import rs.singidunum.carbonfootprints.controller.dto.response.CarbonCoefResponseDto;
 import rs.singidunum.carbonfootprints.model.CarbonCoef;
 
 import java.util.List;

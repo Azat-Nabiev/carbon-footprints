@@ -1,4 +1,4 @@
-package rs.singidunum.carbonfootprints.dto.response;
+package rs.singidunum.carbonfootprints.controller.dto.response;
 
 import lombok.Builder;
 import lombok.Data;

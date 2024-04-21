@@ -6,14 +6,13 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import rs.singidunum.carbonfootprints.controller.mapper.UserMapper;
-import rs.singidunum.carbonfootprints.dto.request.UserRequestDto;
-import rs.singidunum.carbonfootprints.dto.response.UserResponseDto;
+import rs.singidunum.carbonfootprints.controller.dto.request.UserRequestDto;
+import rs.singidunum.carbonfootprints.controller.dto.response.UserResponseDto;
 import rs.singidunum.carbonfootprints.model.User;
 import rs.singidunum.carbonfootprints.service.UserService;
 
@@ -26,13 +25,6 @@ public class UserController {
 
     private final UserService userService;
     private final UserMapper userMapper;
-
-    @PostMapping("/register")
-    @Operation(summary = "Register a user")
-    public ResponseEntity<UserResponseDto> register(@RequestBody UserRequestDto userRequestDto) {
-        User user = userService.add(userRequestDto);
-        return ResponseEntity.ok(userMapper.mapToUserResponseDto(user));
-    }
 
     @GetMapping
     @Operation(summary = "Getting all active user")

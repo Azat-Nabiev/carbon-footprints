@@ -13,8 +13,8 @@ import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import rs.singidunum.carbonfootprints.controller.mapper.AddressMapper;
-import rs.singidunum.carbonfootprints.dto.request.AddressRequestDto;
-import rs.singidunum.carbonfootprints.dto.response.AddressResponseDto;
+import rs.singidunum.carbonfootprints.controller.dto.request.AddressRequestDto;
+import rs.singidunum.carbonfootprints.controller.dto.response.AddressResponseDto;
 import rs.singidunum.carbonfootprints.model.Address;
 import rs.singidunum.carbonfootprints.service.AddressService;
 

@@ -1,14 +1,14 @@
 class AuthService {
     static API_BASE_URL = 'http://localhost:8085';
 
-    static async register(email, password, firstName, lastName, role, navigate) {
+    static async register(email, password, firstName, lastName, navigate) {
         try {
-            const response = await fetch(`${this.API_BASE_URL}/api/v1/auth/register`, {
+            const response = await fetch(`${this.API_BASE_URL}/api/v1/user/register`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify({ email, password, firstName, lastName, role }),
+                body: JSON.stringify({ email, password, firstName, lastName}),
             });
             const data = await response.json();
             if (response.ok) {
@@ -17,7 +17,6 @@ class AuthService {
                 navigate('/', { state: { message: 'Registration successful! Please log in.' } })
             } else {
                 console.error('Registration failed:', data.message);
-                // Handle registration errors
             }
         } catch (error) {
             console.error('An error occurred during registration:', error);
@@ -26,7 +25,7 @@ class AuthService {
 
     static async login(email, password, navigate) {
         try {
-            const response = await fetch(`${this.API_BASE_URL}/api/v1/auth/authenticate`, {
+            const response = await fetch(`${this.API_BASE_URL}/api/v1/user/authenticate`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -61,7 +60,6 @@ class AuthService {
         const refreshToken = localStorage.getItem('refreshToken');
         if (!refreshToken) {
             console.error('No refresh token available');
-            // Handle case where there is no refresh token available
             return;
         }
 
@@ -170,10 +168,10 @@ class AuthService {
 
         let response = await addBookRequest();
 
-        if (response.status === 401) { // Если токен истек
-            accessToken = await this.refreshToken(); // Пытаемся получить новый токен
+        if (response.status === 401) {
+            accessToken = await this.refreshToken();
             if (accessToken) {
-                response = await addBookRequest(); // Повторяем запрос с новым токеном
+                response = await addBookRequest();
             } else {
                 throw new Error('Unable to refresh token');
             }
@@ -184,11 +182,9 @@ class AuthService {
             return newBook;
         } else {
             const errorData = await response.json();
-            throw new Error(errorData.message); // Выбрасываем ошибку с сообщением от сервера
+            throw new Error(errorData.message);
         }
     }
-
-
 }
 
 export default AuthService;

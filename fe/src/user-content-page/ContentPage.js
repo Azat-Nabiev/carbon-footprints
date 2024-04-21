@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import AuthService from './AuthService';
+import AuthService from '../AuthService';
 import './ContentPage.css';
 
 function ContentPage() {

@@ -13,8 +13,8 @@ import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import rs.singidunum.carbonfootprints.controller.mapper.CarbonCoefMapper;
-import rs.singidunum.carbonfootprints.dto.request.CarbonCoefRequestDto;
-import rs.singidunum.carbonfootprints.dto.response.CarbonCoefResponseDto;
+import rs.singidunum.carbonfootprints.controller.dto.request.CarbonCoefRequestDto;
+import rs.singidunum.carbonfootprints.controller.dto.response.CarbonCoefResponseDto;
 import rs.singidunum.carbonfootprints.model.CarbonCoef;
 import rs.singidunum.carbonfootprints.service.CarbonCoefService;
 

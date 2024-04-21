@@ -4,7 +4,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import rs.singidunum.carbonfootprints.dto.request.CarbonCoefRequestDto;
+import rs.singidunum.carbonfootprints.controller.dto.request.CarbonCoefRequestDto;
 import rs.singidunum.carbonfootprints.model.CarbonCoef;
 import rs.singidunum.carbonfootprints.model.User;
 import rs.singidunum.carbonfootprints.model.enums.EntityStatus;

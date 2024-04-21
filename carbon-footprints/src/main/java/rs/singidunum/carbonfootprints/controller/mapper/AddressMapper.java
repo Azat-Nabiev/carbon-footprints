@@ -2,9 +2,9 @@ package rs.singidunum.carbonfootprints.controller.mapper;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import rs.singidunum.carbonfootprints.dto.response.AddressResponseDto;
-import rs.singidunum.carbonfootprints.dto.response.CarbonResponseDto;
-import rs.singidunum.carbonfootprints.dto.response.UserResponseDto;
+import rs.singidunum.carbonfootprints.controller.dto.response.AddressResponseDto;
+import rs.singidunum.carbonfootprints.controller.dto.response.CarbonResponseDto;
+import rs.singidunum.carbonfootprints.controller.dto.response.UserResponseDto;
 import rs.singidunum.carbonfootprints.model.Address;
 import rs.singidunum.carbonfootprints.model.Carbon;
 import rs.singidunum.carbonfootprints.model.User;

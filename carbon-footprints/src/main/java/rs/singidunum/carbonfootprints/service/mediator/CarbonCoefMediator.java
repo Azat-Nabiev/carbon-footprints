@@ -2,7 +2,7 @@ package rs.singidunum.carbonfootprints.service.mediator;
 
 import io.micrometer.common.util.StringUtils;
 import org.springframework.stereotype.Service;
-import rs.singidunum.carbonfootprints.dto.request.CarbonCoefRequestDto;
+import rs.singidunum.carbonfootprints.controller.dto.request.CarbonCoefRequestDto;
 import rs.singidunum.carbonfootprints.model.CarbonCoef;
 
 @Service

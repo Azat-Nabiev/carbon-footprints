@@ -4,7 +4,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import rs.singidunum.carbonfootprints.dto.request.UserRequestDto;
+import rs.singidunum.carbonfootprints.controller.dto.request.UserRequestDto;
 import rs.singidunum.carbonfootprints.model.User;
 import rs.singidunum.carbonfootprints.model.enums.EntityStatus;
 import rs.singidunum.carbonfootprints.repository.UserRepository;
@@ -69,7 +69,7 @@ public class UserServiceImpl implements UserService {
         LocalDateTime now = LocalDateTime.now();
         return User
                 .builder()
-                .name(userRequestDto.getName())
+                .firstName(userRequestDto.getFirstName())
                 .lastName(userRequestDto.getLastName())
                 .email(userRequestDto.getEmail())
                 .password(userRequestDto.getPassword())

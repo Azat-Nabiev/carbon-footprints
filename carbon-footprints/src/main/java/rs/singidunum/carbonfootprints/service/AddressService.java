@@ -1,6 +1,6 @@
 package rs.singidunum.carbonfootprints.service;
 
-import rs.singidunum.carbonfootprints.dto.request.AddressRequestDto;
+import rs.singidunum.carbonfootprints.controller.dto.request.AddressRequestDto;
 import rs.singidunum.carbonfootprints.model.Address;
 
 import java.util.List;
