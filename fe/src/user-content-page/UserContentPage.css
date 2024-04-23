@@ -1,37 +1,68 @@
-/* This stays the same as your previous pages for consistency */
 .page-container {
+    width: 100%; /* Use the full width of the viewport */
+    padding: 20px;
     display: flex;
-    justify-content: center;
+    flex-direction: column;
     align-items: center;
-    height: 100vh;
-    background-color: #edf2f7;
 }
 
-/* This will be the container for the user profile, styled similarly to the registration container */
-.profile-container {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    max-width: 400px;
-    width: 100%;
-    margin: auto;
-    padding: 40px;
-    border-radius: 8px;
-    background-color: #f0f9f4;
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
-}
-
-/* Similar to .register-title, but for the profile heading */
 .profile-title {
     font-size: 24px;
     color: #276749;
     margin-bottom: 24px;
 }
 
-
-/* Style for each info item, similar to .register-input but as a <p> tag */
-.info-item {
-    margin-bottom: 15px; /* Adds a little space between each info item */
-    font-size: 16px;
+.logout-button {
+    align-self: flex-end; /* Position logout button on the right */
+    padding: 8px 16px;
+    margin-bottom: 68px;
+    background-color: #f44336;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-right: 50px;
 }
+
+.content-container {
+    display: flex;
+    width: 100%; /* Use the full width of the page-container */
+    max-width: 1200px; /* Optional max width for better large screen appearance */
+}
+
+.profile-container{
+    flex: 1; /* Each container takes up half the space */
+    padding: 20px;
+    background-color: #f0f9f4;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin: 10px;
+    margin-bottom: 500px;
+    margin-left: 10px;
+}
+
+.addresses-container {
+    flex: 1; /* Each container takes up half the space */
+    padding: 20px;
+    background-color: #f0f9f4;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin: 10px;
+    margin-bottom: 500px;
+}
+
+.info-item {
+    margin-bottom: 10px;
+}
+
+.info-label {
+    font-weight: bold;
+}
+
+.info-value {
+    margin-left: 5px;
+}
+
 .user-info {
     background-color: white;
     border: 1px solid #ccc;
@@ -40,17 +71,3 @@
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     text-align: left; /* Aligns all text to the left */
 }
-
-.info-label {
-    display: inline-block; /* Adjust as needed */
-    font-weight: bold;
-    margin-right: 5px;
-    color: #276749;
-}
-
-.info-value {
-    color: #333;
-    display: inline; /* Darker text for better readability */
-}
-
-/* You might not need button styles if there's no button, but they're here if needed */

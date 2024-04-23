@@ -118,6 +118,40 @@ class AuthService {
         }
     }
 
+    static async getUserAddresses(userId) {
+        let accessToken = this.getAccessToken();
+        try {
+            let response = await fetch(`${this.API_BASE_URL}/api/v1/address/${userId}`, {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${accessToken}`,
+                },
+            });
+
+            if (response.status === 401) {
+                accessToken = await this.refreshToken();
+                if (accessToken) {
+                    response = await fetch(`${this.API_BASE_URL}/api/v1/address/${userId}`, {
+                        headers: {
+                            'Authorization': `Bearer ${accessToken}`,
+                        },
+                    });
+                    if (!response.ok) {
+                        throw new Error('Failed to fetch content after refreshing token');
+                    }
+                } else {
+                    throw new Error('Unable to refresh token');
+                }
+            }
+
+            const data = await response.json();
+            return data;
+        } catch (error) {
+            console.error('An error occurred while fetching content:', error);
+        }
+    }
+
     static async deleteBook(bookId) {
         let accessToken = this.getAccessToken();
         const userId = localStorage.getItem('userId');
