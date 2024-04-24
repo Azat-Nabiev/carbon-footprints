@@ -6,12 +6,15 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import rs.singidunum.carbonfootprints.controller.dto.request.UserRequestDto;
 import rs.singidunum.carbonfootprints.model.User;
+import rs.singidunum.carbonfootprints.model.UserRating;
 import rs.singidunum.carbonfootprints.model.enums.EntityStatus;
 import rs.singidunum.carbonfootprints.repository.UserRepository;
+import rs.singidunum.carbonfootprints.service.CarbonService;
 import rs.singidunum.carbonfootprints.service.UserService;
 import rs.singidunum.carbonfootprints.service.mediator.UserMediator;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -21,12 +24,15 @@ public class UserServiceImpl implements UserService {
 
     private final UserRepository userRepository;
     private final UserMediator userMediator;
+    private final CarbonService carbonService;
 
     @Override
     @Transactional(readOnly = true)
-    public List<User> getAll() {
-        return userRepository.getAllActive();
+    public List<UserRating> getAllSorted() {
+        List<User> users = userRepository.getAllActive();
+        return createUserRating(users);
     }
+
 
     @Override
     @Transactional(readOnly = true)
@@ -39,9 +45,7 @@ public class UserServiceImpl implements UserService {
     @Transactional
     public User add(UserRequestDto userRequestDto) {
         User user = mapToUser(userRequestDto);
-
         userRepository.save(user);
-
         return user;
     }
 
@@ -75,5 +79,16 @@ public class UserServiceImpl implements UserService {
                 .password(userRequestDto.getPassword())
                 .createdDate(now)
                 .status(EntityStatus.ACTIVE).build();
+    }
+
+    private List<UserRating> createUserRating(List<User> users) {
+        List<UserRating> userRatings = new ArrayList<>();
+
+        for (User user : users) {
+            userRatings.add(new UserRating(user.getId(), user.getFirstName(),
+                    user.getLastName(), carbonService.getProducedCarbon(user.getId()).getProduced()));
+        }
+
+        return userRatings;
     }
 }

@@ -16,6 +16,7 @@ import rs.singidunum.carbonfootprints.controller.mapper.CarbonMapper;
 import rs.singidunum.carbonfootprints.controller.dto.request.CarbonRequestDto;
 import rs.singidunum.carbonfootprints.controller.dto.response.CarbonResponseDto;
 import rs.singidunum.carbonfootprints.model.Carbon;
+import rs.singidunum.carbonfootprints.model.ProducedCarbon;
 import rs.singidunum.carbonfootprints.service.CarbonService;
 
 import java.util.List;
@@ -61,5 +62,11 @@ public class CarbonController {
     public ResponseEntity<CarbonResponseDto> delete(@PathVariable(name = "id") Long id) {
         Carbon carbon = carbonService.delete(id);
         return ResponseEntity.ok(carbonMapper.mapToCarbonResponseDto(carbon));
+    }
+
+    @GetMapping("/amount/{id}")
+    @Operation(summary = "Getting all produced carbon")
+    public ResponseEntity<ProducedCarbon> getProducedCarbon(@PathVariable(value = "id") Long id) {
+        return ResponseEntity.ok(carbonService.getProducedCarbon(id));
     }
 }

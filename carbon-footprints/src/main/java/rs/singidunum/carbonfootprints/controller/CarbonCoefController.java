@@ -66,6 +66,4 @@ public class CarbonCoefController {
         CarbonCoef carbonCoef = carbonCoefService.delete(coefId);
         return ResponseEntity.ok(carbonCoefMapper.mapToCarbonCoefResponseDto(carbonCoef));
     }
-
-
 }

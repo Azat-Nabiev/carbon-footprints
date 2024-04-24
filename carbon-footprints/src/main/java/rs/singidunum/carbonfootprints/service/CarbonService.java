@@ -2,6 +2,7 @@ package rs.singidunum.carbonfootprints.service;
 
 import rs.singidunum.carbonfootprints.controller.dto.request.CarbonRequestDto;
 import rs.singidunum.carbonfootprints.model.Carbon;
+import rs.singidunum.carbonfootprints.model.ProducedCarbon;
 
 import java.util.List;
 
@@ -11,4 +12,5 @@ public interface CarbonService {
     Carbon add(Long userId, CarbonRequestDto carbonRequestDto);
     Carbon edit(Long id, CarbonRequestDto carbonRequestDto);
     Carbon delete(Long id);
+    ProducedCarbon getProducedCarbon(Long id);
 }

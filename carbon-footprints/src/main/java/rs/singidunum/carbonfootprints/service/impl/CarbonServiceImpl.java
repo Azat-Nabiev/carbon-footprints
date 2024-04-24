@@ -8,6 +8,7 @@ import rs.singidunum.carbonfootprints.controller.dto.request.CarbonRequestDto;
 import rs.singidunum.carbonfootprints.model.Address;
 import rs.singidunum.carbonfootprints.model.Carbon;
 import rs.singidunum.carbonfootprints.model.CarbonCoef;
+import rs.singidunum.carbonfootprints.model.ProducedCarbon;
 import rs.singidunum.carbonfootprints.model.User;
 import rs.singidunum.carbonfootprints.model.enums.EntityStatus;
 import rs.singidunum.carbonfootprints.repository.AddressRepository;
@@ -30,6 +31,7 @@ public class CarbonServiceImpl implements CarbonService {
     private final AddressRepository addressRepository;
     private final CarbonCoefRepository carbonCoefRepository;
     private final CarbonMediator carbonMediator;
+    private final CarbonUtil carbonUtil;
 
     // CARBON_DIOXIDE_CONVERSATION_FACTOR = 44/12
     private static final Double CARBON_DIOXIDE_CONVERSATION_FACTOR = 3.7;
@@ -108,5 +110,13 @@ public class CarbonServiceImpl implements CarbonService {
     private Double countProducedCarbon(CarbonCoef carbonCoef, Double amount) {
         return Math.ceil(amount * carbonCoef.getCef() * carbonCoef.getCoc()
                 * carbonCoef.getNcv() * CARBON_DIOXIDE_CONVERSATION_FACTOR);
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public ProducedCarbon getProducedCarbon(Long id) {
+        List<Carbon> carbons = carbonRepository.getAllActiveByUserId(id);
+
+        return carbonUtil.getAllProducedCarbon(carbons);
     }
 }
