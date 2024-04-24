@@ -47,6 +47,8 @@ public class SecurityConfiguration {
                         req.requestMatchers(WHITE_LIST_URL)
                            .permitAll()
                            .requestMatchers("/api/v1/content/**").hasAnyRole(ADMIN.name(), USER.name())
+                           .requestMatchers("/api/v1/carbon/coef/**").hasAnyRole(ADMIN.name(), USER.name())
+                           .requestMatchers("/api/v1/address/**").hasAnyRole(ADMIN.name(), USER.name())
                            .anyRequest()
                            .authenticated()
                 )

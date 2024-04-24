@@ -17,5 +17,5 @@ public class AddressRequestDto {
     private String house;
     private String flat;
     private String postalCode;
-    private BuildingType buildingType;
+    private String buildingType;
 }
