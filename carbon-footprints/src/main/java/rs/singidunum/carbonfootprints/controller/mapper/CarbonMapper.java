@@ -40,9 +40,7 @@ public class CarbonMapper {
 
     private CarbonCoefResponseDto mapToCompactCarbonCoefResponse(CarbonCoef carbonCoef) {
         return CarbonCoefResponseDto.builder()
-                .id(carbonCoef.getId()).name(carbonCoef.getName())
-                .cef(carbonCoef.getCef()).coc(carbonCoef.getCoc())
-                                    .ncv(carbonCoef.getNcv()).build();
+                .id(carbonCoef.getId()).name(carbonCoef.getName()).build();
     }
 
     private AddressResponseDto mapToCompactAddressResponseDto(Address address) {

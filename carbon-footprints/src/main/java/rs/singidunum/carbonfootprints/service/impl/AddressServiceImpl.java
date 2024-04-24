@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import rs.singidunum.carbonfootprints.controller.dto.request.AddressRequestDto;
 import rs.singidunum.carbonfootprints.model.Address;
+import rs.singidunum.carbonfootprints.model.enums.BuildingType;
 import rs.singidunum.carbonfootprints.model.enums.EntityStatus;
 import rs.singidunum.carbonfootprints.repository.AddressRepository;
 import rs.singidunum.carbonfootprints.service.AddressService;
@@ -73,7 +74,7 @@ public class AddressServiceImpl implements AddressService {
                 .house(addressRequestDto.getHouse())
                 .flat(addressRequestDto.getFlat())
                 .postalCode(addressRequestDto.getPostalCode())
-                .buildingType(addressRequestDto.getBuildingType())
+                .buildingType(BuildingType.valueOf(addressRequestDto.getBuildingType()))
                       .build();
     }
 }
