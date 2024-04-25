@@ -19,7 +19,10 @@ import rs.singidunum.carbonfootprints.service.CarbonService;
 import rs.singidunum.carbonfootprints.service.mediator.CarbonMediator;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Service
 @Slf4j
@@ -111,5 +114,19 @@ public class CarbonServiceImpl implements CarbonService {
         List<Carbon> carbons = carbonRepository.getAllActiveByUserId(id);
 
         return carbonUtil.getAllProducedCarbon(carbons);
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public Set<String> getUsedRecources(Long id) {
+        Set<String> usedResources = new HashSet<>();
+        List<Carbon> carbons = carbonRepository.getAllActiveByUserId(id);
+
+        for (Carbon carbon : carbons) {
+            CarbonCoef carbonCoef = carbonCoefRepository.findById(carbon.getCoef().getId())
+                    .orElseThrow(() -> new IllegalStateException("Cannot find carbon coef by id"));
+            usedResources.add(carbonCoef.getName());
+        }
+        return usedResources;
     }
 }

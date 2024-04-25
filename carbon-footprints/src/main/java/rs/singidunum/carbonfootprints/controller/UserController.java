@@ -23,10 +23,10 @@ public class UserController {
     private final UserService userService;
     private final UserMapper userMapper;
 
-    @GetMapping
+    @GetMapping("/rate/{id}")
     @Operation(summary = "Getting all active user sorted by the produced amount")
-    public ResponseEntity<List<UserRating>> retrieveAll() {
-        List<UserRating> users = userService.getAllSorted();
+    public ResponseEntity<List<UserRating>> retrieveAll(@PathVariable(value = "id") Long userId) {
+        List<UserRating> users = userService.getAllSorted(userId);
         return ResponseEntity.ok(users);
     }
 

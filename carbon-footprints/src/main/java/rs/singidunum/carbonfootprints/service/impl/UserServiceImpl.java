@@ -18,6 +18,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
+import java.util.Objects;
 
 @Service
 @Slf4j
@@ -30,9 +31,9 @@ public class UserServiceImpl implements UserService {
 
     @Override
     @Transactional(readOnly = true)
-    public List<UserRating> getAllSorted() {
+    public List<UserRating> getAllSorted(Long userId) {
         List<User> users = userRepository.getAllActive();
-        return createUserRating(users);
+        return createUserRating(users, userId);
     }
 
 
@@ -83,12 +84,22 @@ public class UserServiceImpl implements UserService {
                 .status(EntityStatus.ACTIVE).build();
     }
 
-    private List<UserRating> createUserRating(List<User> users) {
+    private List<UserRating> createUserRating(List<User> users, Long userId) {
         List<UserRating> userRatings = new ArrayList<>();
-
+        long counter = 0L;
         for (User user : users) {
-            userRatings.add(new UserRating(user.getId(), user.getFirstName(),
-                    user.getLastName(), carbonService.getProducedCarbon(user.getId()).getProduced()));
+            UserRating userRating = new UserRating();
+            userRating.setId(user.getId());
+            userRating.setFirstName(user.getFirstName());
+            userRating.setLastName(user.getLastName());
+            userRating.setProduced(carbonService.getProducedCarbon(user.getId()).getProduced());
+
+            if (Objects.equals(userId, user.getId())) {
+                userRating.setUsersCurrentPosition(counter);
+            }
+
+            userRatings.add(userRating);
+            counter++;
         }
 
         userRatings.sort(Comparator.comparingDouble(UserRating::getProduced));

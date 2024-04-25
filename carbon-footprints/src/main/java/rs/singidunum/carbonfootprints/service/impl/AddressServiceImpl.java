@@ -196,7 +196,7 @@ public class AddressServiceImpl implements AddressService {
                     cell.setCellType(CellType.STRING);
                     cell.setCellValue(carbon.getProduced());
 
-                    cell = row.createCell(6);
+                    cell = row.createCell(7);
                     cell.setCellType(CellType.STRING);
                     cell.setCellValue(carbon.getLastUpd().toString());
                 }
@@ -276,6 +276,7 @@ public class AddressServiceImpl implements AddressService {
         addressFullResponseDto.setStreet(address.getStreet());
         addressFullResponseDto.setHouse(address.getHouse());
         addressFullResponseDto.setFlat(address.getFlat());
+        addressFullResponseDto.setPostalCode(address.getPostalCode());
         addressFullResponseDto.setBuildingType(address.getBuildingType().toString());
         addressFullResponseDto.setCarbon(buildCarbonCompact(address.getCarbon()));
 

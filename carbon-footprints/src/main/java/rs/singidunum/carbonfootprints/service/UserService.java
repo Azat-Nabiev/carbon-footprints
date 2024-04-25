@@ -7,7 +7,7 @@ import rs.singidunum.carbonfootprints.model.UserRating;
 import java.util.List;
 
 public interface UserService {
-    List<UserRating> getAllSorted();
+    List<UserRating> getAllSorted(Long userId);
     User getByUserId(Long id);
     User add(UserRequestDto userRequestDto);
     User edit(Long id, UserRequestDto userRequestDto);

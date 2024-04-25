@@ -5,6 +5,7 @@ import rs.singidunum.carbonfootprints.model.Carbon;
 import rs.singidunum.carbonfootprints.model.ProducedCarbon;
 
 import java.util.List;
+import java.util.Set;
 
 public interface CarbonService {
     List<Carbon> getAll();
@@ -13,4 +14,5 @@ public interface CarbonService {
     Carbon edit(Long id, CarbonRequestDto carbonRequestDto);
     Carbon delete(Long id);
     ProducedCarbon getProducedCarbon(Long id);
+    Set<String> getUsedRecources(Long id);
 }

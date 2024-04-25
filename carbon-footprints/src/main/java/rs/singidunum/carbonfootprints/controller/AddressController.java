@@ -86,7 +86,7 @@ public class AddressController {
     public ResponseEntity<?> getFileById(@PathVariable(name = "id") Long id) throws UnsupportedEncodingException {
 
         byte[] file = addressService.getXlsxReport(id);
-        String fileName = String.format("%s", "Report");
+        String fileName = String.format("%s", "Report.xlsx");
 
         return ResponseEntity.ok()
                              .contentType(MediaType.APPLICATION_OCTET_STREAM)

@@ -20,6 +20,7 @@ import rs.singidunum.carbonfootprints.model.ProducedCarbon;
 import rs.singidunum.carbonfootprints.service.CarbonService;
 
 import java.util.List;
+import java.util.Set;
 
 @RestController
 @RequestMapping("/api/v1/carbon")
@@ -68,5 +69,10 @@ public class CarbonController {
     @Operation(summary = "Getting all produced carbon")
     public ResponseEntity<ProducedCarbon> getProducedCarbon(@PathVariable(value = "id") Long id) {
         return ResponseEntity.ok(carbonService.getProducedCarbon(id));
+    }
+
+    @GetMapping("/type/{id}")
+    public ResponseEntity<Set<String>> getUsedResources(@PathVariable(value = "id") Long id) {
+        return ResponseEntity.ok(carbonService.getUsedRecources(id));
     }
 }
