@@ -2,6 +2,8 @@ package rs.singidunum.carbonfootprints.controller;
 
 import io.swagger.v3.oas.annotations.Operation;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -12,12 +14,17 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import rs.singidunum.carbonfootprints.controller.dto.request.AddressFullRequestDto;
+import rs.singidunum.carbonfootprints.controller.dto.response.AddressFullResponseDto;
 import rs.singidunum.carbonfootprints.controller.mapper.AddressMapper;
 import rs.singidunum.carbonfootprints.controller.dto.request.AddressRequestDto;
-import rs.singidunum.carbonfootprints.controller.dto.response.AddressResponseDto;
+import rs.singidunum.carbonfootprints.controller.dto.response.AddressСompactResponseDto;
 import rs.singidunum.carbonfootprints.model.Address;
 import rs.singidunum.carbonfootprints.service.AddressService;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
 import java.util.List;
 
 @RestController
@@ -30,38 +37,66 @@ public class AddressController {
 
     @GetMapping
     @Operation(summary = "Retrieving all ACTIVE addresses")
-    public ResponseEntity<List<AddressResponseDto>> retrieveAll() {
+    public ResponseEntity<List<AddressСompactResponseDto>> retrieveAll() {
         List<Address> addressList = addressService.getAll();
-        return ResponseEntity.ok(addressMapper.mapToResponseDtoList(addressList));
+        return ResponseEntity.ok(addressMapper.mapToCompactResponseDtoList(addressList));
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("/compact/{id}")
     @Operation(summary = "Retrieving all ACTIVE addresses by ID")
-    public ResponseEntity<List<AddressResponseDto>> retrieveById(@PathVariable(name = "id") Long id) {
-        List<Address> addressList = addressService.getAllByUserId(id);
-        return ResponseEntity.ok(addressMapper.mapToResponseDtoList(addressList));
+    public ResponseEntity<List<AddressСompactResponseDto>> retrieveByIdCompact(@PathVariable(name = "id") Long id) {
+        List<Address> addressList = addressService.getCompactAllByUserId(id);
+        return ResponseEntity.ok(addressMapper.mapToCompactResponseDtoList(addressList));
+    }
+// TODO: add adding and editing adresses
+
+    @GetMapping("/full/{id}")
+    @Operation(summary = "Retrieving all ACTIVE addresses by ID")
+    public ResponseEntity<List<AddressFullResponseDto>> retrieveById(@PathVariable(name = "id") Long id) {
+        List<AddressFullResponseDto> addressList = addressService.getFullAllByUserId(id);
+        return ResponseEntity.ok(addressList);
     }
 
     @PostMapping
     @Operation(summary = "Adding an address")
-    public ResponseEntity<AddressResponseDto> add(@RequestHeader("USER_ID") Long id,
-            @RequestBody AddressRequestDto addressRequestDto) {
-        Address address = addressService.add(addressRequestDto);
-        return ResponseEntity.ok(addressMapper.mapToAddressResponseDto(address));
+    public ResponseEntity<AddressFullResponseDto> add(@RequestHeader("USER_ID") Long id,
+                                                         @RequestBody AddressFullRequestDto addressRequestDto) {
+        AddressFullResponseDto address = addressService.add(id, addressRequestDto);
+        return ResponseEntity.ok(address);
     }
 
     @PutMapping("/{id}")
     @Operation(summary = "Editing an address by ID")
-    public ResponseEntity<AddressResponseDto> edit(@PathVariable(name = "id") Long id,
-                                                   @RequestBody AddressRequestDto addressRequestDto) {
+    public ResponseEntity<AddressСompactResponseDto> edit(@PathVariable(name = "id") Long id,
+                                                          @RequestBody AddressRequestDto addressRequestDto) {
         Address address = addressService.edit(id, addressRequestDto);
-        return ResponseEntity.ok(addressMapper.mapToAddressResponseDto(address));
+        return ResponseEntity.ok(addressMapper.mapToCompactAddressResponseDto(address));
     }
 
     @DeleteMapping("/{id}")
     @Operation(summary = "Deleting an address by ID")
-    public ResponseEntity<AddressResponseDto> delete(@PathVariable(name = "id") Long id) {
+    public ResponseEntity<AddressСompactResponseDto> delete(@PathVariable(name = "id") Long id) {
         Address address = addressService.delete(id);
-        return ResponseEntity.ok(addressMapper.mapToAddressResponseDto(address));
+        return ResponseEntity.ok(addressMapper.mapToCompactAddressResponseDto(address));
+    }
+
+
+    @GetMapping("/report/{id}")
+    @Operation(summary = "Getting the file by id")
+    public ResponseEntity<?> getFileById(@PathVariable(name = "id") Long id) throws UnsupportedEncodingException {
+
+        byte[] file = addressService.getXlsxReport(id);
+        String fileName = String.format("%s", "Report");
+
+        return ResponseEntity.ok()
+                             .contentType(MediaType.APPLICATION_OCTET_STREAM)
+                             .header(
+                                     HttpHeaders.CONTENT_DISPOSITION,
+                                     "attachment; filename=\"" + URLEncoder.encode(
+                                             fileName,
+                                             StandardCharsets.UTF_8.toString()
+                                     ) + "\""
+                             )
+                             .body(file);
     }
 }

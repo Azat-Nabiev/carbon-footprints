@@ -14,6 +14,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 import rs.singidunum.carbonfootprints.model.enums.BuildingType;
 import rs.singidunum.carbonfootprints.model.enums.EntityStatus;
 
@@ -26,6 +27,7 @@ import java.util.Objects;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
+@ToString(exclude = {"users", "carbon"})
 public class Address {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

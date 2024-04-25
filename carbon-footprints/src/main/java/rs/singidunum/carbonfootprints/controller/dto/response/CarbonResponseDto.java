@@ -2,6 +2,7 @@ package rs.singidunum.carbonfootprints.controller.dto.response;
 
 import lombok.Builder;
 import lombok.Data;
+import rs.singidunum.carbonfootprints.controller.dto.CarbonCoefDto;
 
 import java.time.LocalDateTime;
 
@@ -10,8 +11,8 @@ import java.time.LocalDateTime;
 public class CarbonResponseDto {
     private Long id;
     private UserResponseDto user;
-    private AddressResponseDto address;
-    private CarbonCoefResponseDto coef;
+    private AddressСompactResponseDto address;
+    private CarbonCoefDto coef;
     private Double amount;
     private LocalDateTime lastUpdated;
     private Double produced;

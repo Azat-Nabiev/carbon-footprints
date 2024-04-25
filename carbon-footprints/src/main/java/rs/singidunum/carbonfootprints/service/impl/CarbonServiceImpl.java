@@ -33,9 +33,6 @@ public class CarbonServiceImpl implements CarbonService {
     private final CarbonMediator carbonMediator;
     private final CarbonUtil carbonUtil;
 
-    // CARBON_DIOXIDE_CONVERSATION_FACTOR = 44/12
-    private static final Double CARBON_DIOXIDE_CONVERSATION_FACTOR = 3.7;
-
     @Override
     @Transactional(readOnly = true)
     public List<Carbon> getAll() {
@@ -75,7 +72,7 @@ public class CarbonServiceImpl implements CarbonService {
         carbon.setUser(user);
         carbon.setStatus(EntityStatus.ACTIVE);
         carbon.setLastUpdated(LocalDateTime.now());
-        carbon.setProduced(countProducedCarbon(carbonCoef, carbon.getAmount()));
+        carbon.setProduced(carbonUtil.countProducedCarbon(carbonCoef, carbon.getAmount()));
 
         carbonRepository.save(carbon);
         return carbon;
@@ -106,11 +103,7 @@ public class CarbonServiceImpl implements CarbonService {
                      .amount(carbonRequestDto.getAmount())
                      .build();
     }
-    // E = M * K1 * NCV * K2 * 44/12
-    private Double countProducedCarbon(CarbonCoef carbonCoef, Double amount) {
-        return Math.ceil(amount * carbonCoef.getCef() * carbonCoef.getCoc()
-                * carbonCoef.getNcv() * CARBON_DIOXIDE_CONVERSATION_FACTOR);
-    }
+
 
     @Override
     @Transactional(readOnly = true)

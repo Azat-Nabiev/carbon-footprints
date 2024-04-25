@@ -7,7 +7,7 @@ import java.util.List;
 
 @Builder
 @Data
-public class AddressResponseDto {
+public class AddressСompactResponseDto {
     private Long id;
     private String country;
     private String city;

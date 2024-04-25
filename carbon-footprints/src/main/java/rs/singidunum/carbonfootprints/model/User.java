@@ -18,6 +18,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import rs.singidunum.carbonfootprints.model.enums.EntityStatus;
@@ -34,6 +35,7 @@ import java.util.Objects;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
+@ToString(exclude = {"carbons", "carbonCoefs", "tokens", "addresses"})
 public class User implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -54,10 +56,12 @@ public class User implements UserDetails {
     @Column(name = "created_dt")
     private LocalDateTime createdDate;
 
-    @OneToMany(mappedBy = "user")
+    @OneToMany(mappedBy = "user", fetch = FetchType.EAGER)
+    @JsonManagedReference
     private List<Carbon> carbons;
 
-    @OneToMany(mappedBy = "user")
+    @OneToMany(mappedBy = "user", fetch = FetchType.EAGER)
+    @JsonManagedReference
     private List<CarbonCoef> carbonCoefs;
 
     @Enumerated(EnumType.STRING)
@@ -66,9 +70,15 @@ public class User implements UserDetails {
     @Enumerated(EnumType.STRING)
     private Role role;
 
-    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "user", fetch = FetchType.EAGER)
     @JsonManagedReference
     private List<Token> tokens;
+
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(name = "user_address_assn",
+            joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"),
+            inverseJoinColumns = @JoinColumn(name = "address_id", referencedColumnName = "id"))
+    private List<Address> addresses;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
@@ -104,12 +114,6 @@ public class User implements UserDetails {
     public boolean isEnabled() {
         return true;
     }
-
-    @ManyToMany
-    @JoinTable(name = "user_address_assn",
-            joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"),
-            inverseJoinColumns = @JoinColumn(name = "address_id", referencedColumnName = "id"))
-    private List<Address> addresses;
 
     @Override
     public boolean equals(Object o) {

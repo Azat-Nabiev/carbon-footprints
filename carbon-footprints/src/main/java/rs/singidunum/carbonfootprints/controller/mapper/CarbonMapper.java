@@ -2,8 +2,8 @@ package rs.singidunum.carbonfootprints.controller.mapper;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import rs.singidunum.carbonfootprints.controller.dto.response.AddressResponseDto;
-import rs.singidunum.carbonfootprints.controller.dto.response.CarbonCoefResponseDto;
+import rs.singidunum.carbonfootprints.controller.dto.response.AddressСompactResponseDto;
+import rs.singidunum.carbonfootprints.controller.dto.CarbonCoefDto;
 import rs.singidunum.carbonfootprints.controller.dto.response.CarbonResponseDto;
 import rs.singidunum.carbonfootprints.model.Address;
 import rs.singidunum.carbonfootprints.model.Carbon;
@@ -38,22 +38,22 @@ public class CarbonMapper {
     }
 
 
-    private CarbonCoefResponseDto mapToCompactCarbonCoefResponse(CarbonCoef carbonCoef) {
-        return CarbonCoefResponseDto.builder()
-                .id(carbonCoef.getId()).name(carbonCoef.getName()).build();
+    private CarbonCoefDto mapToCompactCarbonCoefResponse(CarbonCoef carbonCoef) {
+        return CarbonCoefDto.builder()
+                            .id(carbonCoef.getId()).name(carbonCoef.getName()).build();
     }
 
-    private AddressResponseDto mapToCompactAddressResponseDto(Address address) {
-        return AddressResponseDto.builder()
-                .id(address.getId())
-                .country(address.getCountry())
-                .city(address.getCity())
-                .street(address.getStreet())
-                .house(address.getHouse())
-                .flat(address.getFlat())
-                .postalCode(address.getPostalCode())
-                .buildingType(address.getBuildingType().toString())
-                .status(address.getStatus().toString())
-                                 .build();
+    private AddressСompactResponseDto mapToCompactAddressResponseDto(Address address) {
+        return AddressСompactResponseDto.builder()
+                                        .id(address.getId())
+                                        .country(address.getCountry())
+                                        .city(address.getCity())
+                                        .street(address.getStreet())
+                                        .house(address.getHouse())
+                                        .flat(address.getFlat())
+                                        .postalCode(address.getPostalCode())
+                                        .buildingType(address.getBuildingType().toString())
+                                        .status(address.getStatus().toString())
+                                        .build();
     }
 }

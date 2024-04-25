@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import rs.singidunum.carbonfootprints.controller.mapper.CarbonCoefMapper;
 import rs.singidunum.carbonfootprints.controller.dto.request.CarbonCoefRequestDto;
-import rs.singidunum.carbonfootprints.controller.dto.response.CarbonCoefResponseDto;
+import rs.singidunum.carbonfootprints.controller.dto.CarbonCoefDto;
 import rs.singidunum.carbonfootprints.model.CarbonCoef;
 import rs.singidunum.carbonfootprints.service.CarbonCoefService;
 
@@ -30,38 +30,31 @@ public class CarbonCoefController {
 
     @GetMapping
     @Operation(summary = "Retrieving all ACTIVE carbon coefs")
-    public ResponseEntity<List<CarbonCoefResponseDto>> retrieveAll() {
+    public ResponseEntity<List<CarbonCoefDto>> retrieveAll() {
         List<CarbonCoef> carbonCoefList = carbonCoefService.getAll();
-        return ResponseEntity.ok(carbonCoefMapper.mapToCarbonCoefResponseDtoList(carbonCoefList));
-    }
-
-    @GetMapping("/{id}")
-    @Operation(summary = "Retrieving all ACTIVE carbon coefs by user id")
-    public ResponseEntity<List<CarbonCoefResponseDto>> retrieveAllByUserId(@PathVariable(name = "id") Long userId) {
-        List<CarbonCoef> carbonCoefList = carbonCoefService.getAllByUserId(userId);
         return ResponseEntity.ok(carbonCoefMapper.mapToCarbonCoefResponseDtoList(carbonCoefList));
     }
 
     @PostMapping
     @Operation(summary = "Adding an carbon coefs")
-    public ResponseEntity<CarbonCoefResponseDto> add(@RequestHeader(name = "USER_ID", required = false) Long userId,
-                                                     @RequestBody CarbonCoefRequestDto carbonCoefRequestDto) {
+    public ResponseEntity<CarbonCoefDto> add(@RequestHeader(name = "USER_ID", required = false) Long userId,
+                                             @RequestBody CarbonCoefRequestDto carbonCoefRequestDto) {
         CarbonCoef carbonCoef = carbonCoefService.add(userId, carbonCoefRequestDto);
         return ResponseEntity.ok(carbonCoefMapper.mapToCarbonCoefResponseDto(carbonCoef));
     }
 
     @PutMapping("/{id}")
     @Operation(summary = "Updating an carbon coefs by user id")
-    public ResponseEntity<CarbonCoefResponseDto> edit(@PathVariable(name = "id") Long coefId,
-                                                      @RequestHeader(name = "USER_ID") Long userId,
-                                                      @RequestBody CarbonCoefRequestDto carbonCoefRequestDto) {
+    public ResponseEntity<CarbonCoefDto> edit(@PathVariable(name = "id") Long coefId,
+                                              @RequestHeader(name = "USER_ID") Long userId,
+                                              @RequestBody CarbonCoefRequestDto carbonCoefRequestDto) {
         CarbonCoef carbonCoef = carbonCoefService.edit(coefId, userId, carbonCoefRequestDto);
         return ResponseEntity.ok(carbonCoefMapper.mapToCarbonCoefResponseDto(carbonCoef));
     }
 
     @DeleteMapping("/{id}")
     @Operation(summary = "Deleting an carbon coefs by user id")
-    public ResponseEntity<CarbonCoefResponseDto> delete(@PathVariable(name = "id") Long coefId) {
+    public ResponseEntity<CarbonCoefDto> delete(@PathVariable(name = "id") Long coefId) {
 
         CarbonCoef carbonCoef = carbonCoefService.delete(coefId);
         return ResponseEntity.ok(carbonCoefMapper.mapToCarbonCoefResponseDto(carbonCoef));

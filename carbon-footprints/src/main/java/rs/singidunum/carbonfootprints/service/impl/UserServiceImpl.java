@@ -15,6 +15,8 @@ import rs.singidunum.carbonfootprints.service.mediator.UserMediator;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 @Service
@@ -89,6 +91,7 @@ public class UserServiceImpl implements UserService {
                     user.getLastName(), carbonService.getProducedCarbon(user.getId()).getProduced()));
         }
 
+        userRatings.sort(Comparator.comparingDouble(UserRating::getProduced));
         return userRatings;
     }
 }
