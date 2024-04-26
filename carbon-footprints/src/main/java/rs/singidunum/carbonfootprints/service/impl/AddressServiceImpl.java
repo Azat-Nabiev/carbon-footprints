@@ -106,6 +106,14 @@ public class AddressServiceImpl implements AddressService {
                                            .orElseThrow(() ->
                                                    new IllegalStateException(String.format("Cannot find an address by id: %s", id)));
         address.setStatus(EntityStatus.ARCHIVED);
+
+        List<Carbon> carbons = address.getCarbon();
+
+        for (Carbon carbon : carbons) {
+            carbon.setStatus(EntityStatus.ARCHIVED);
+        }
+
+        carbonRepository.saveAll(carbons);
         addressRepository.save(address);
 
         return address;

@@ -13,6 +13,6 @@ public interface AddressRepository extends CrudRepository<Address, Long> {
     @Query("select add from Address add where add.status <> 'ARCHIVED' ")
     List<Address> getAllByNonArchived();
 
-    @Query("SELECT a FROM Address a JOIN a.users u WHERE u.id = :id")
+    @Query("SELECT a FROM Address a JOIN a.users u WHERE u.id = :id and a.status <> 'ARCHIVED'")
     List<Address> getAllByUsersAddress(@Param(value = "id") Long userId);
 }
