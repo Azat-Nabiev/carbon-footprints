@@ -142,24 +142,28 @@ public class AddressServiceImpl implements AddressService {
             sheet.autoSizeColumn(2);
 
             cell = row.createCell(3);
-            cell.setCellValue("Postal code");
+            cell.setCellValue("Building type");
             sheet.autoSizeColumn(3);
 
             cell = row.createCell(4);
-            cell.setCellValue("Resource");
+            cell.setCellValue("Postal code");
             sheet.autoSizeColumn(4);
 
             cell = row.createCell(5);
-            cell.setCellValue("Amount");
+            cell.setCellValue("Resource");
             sheet.autoSizeColumn(5);
 
             cell = row.createCell(6);
-            cell.setCellValue("Produced");
+            cell.setCellValue("Amount");
             sheet.autoSizeColumn(6);
 
             cell = row.createCell(7);
-            cell.setCellValue("Date");
+            cell.setCellValue("Produced");
             sheet.autoSizeColumn(7);
+
+            cell = row.createCell(8);
+            cell.setCellValue("Date");
+            sheet.autoSizeColumn(8);
 
 
             for (AddressFullResponseDto address : addresses) {
@@ -182,21 +186,25 @@ public class AddressServiceImpl implements AddressService {
 
                     cell = row.createCell(3);
                     cell.setCellType(CellType.STRING);
-                    cell.setCellValue(address.getPostalCode());
+                    cell.setCellValue(address.getBuildingType());
 
                     cell = row.createCell(4);
                     cell.setCellType(CellType.STRING);
-                    cell.setCellValue(carbon.getCoef().getName());
+                    cell.setCellValue(address.getPostalCode());
 
                     cell = row.createCell(5);
                     cell.setCellType(CellType.STRING);
-                    cell.setCellValue(carbon.getAmount());
+                    cell.setCellValue(carbon.getCoef().getName());
 
                     cell = row.createCell(6);
                     cell.setCellType(CellType.STRING);
-                    cell.setCellValue(carbon.getProduced());
+                    cell.setCellValue(carbon.getAmount());
 
                     cell = row.createCell(7);
+                    cell.setCellType(CellType.STRING);
+                    cell.setCellValue(carbon.getProduced());
+
+                    cell = row.createCell(8);
                     cell.setCellType(CellType.STRING);
                     cell.setCellValue(carbon.getLastUpd().toString());
                 }

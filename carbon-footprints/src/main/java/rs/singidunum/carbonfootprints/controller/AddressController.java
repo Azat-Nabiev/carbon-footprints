@@ -48,7 +48,6 @@ public class AddressController {
         List<Address> addressList = addressService.getCompactAllByUserId(id);
         return ResponseEntity.ok(addressMapper.mapToCompactResponseDtoList(addressList));
     }
-// TODO: add adding and editing adresses
 
     @GetMapping("/full/{id}")
     @Operation(summary = "Retrieving all ACTIVE addresses by ID")
