@@ -2,7 +2,7 @@ package rs.singidunum.carbonfootprints.service;
 
 import rs.singidunum.carbonfootprints.controller.dto.request.UserRequestDto;
 import rs.singidunum.carbonfootprints.model.User;
-import rs.singidunum.carbonfootprints.model.UserRating;
+import rs.singidunum.carbonfootprints.controller.dto.UserRating;
 
 import java.util.List;
 

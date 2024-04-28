@@ -1,4 +1,4 @@
-package rs.singidunum.carbonfootprints.model;
+package rs.singidunum.carbonfootprints.controller.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

@@ -6,7 +6,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import rs.singidunum.carbonfootprints.controller.dto.request.UserRequestDto;
 import rs.singidunum.carbonfootprints.model.User;
-import rs.singidunum.carbonfootprints.model.UserRating;
+import rs.singidunum.carbonfootprints.controller.dto.UserRating;
 import rs.singidunum.carbonfootprints.model.enums.EntityStatus;
 import rs.singidunum.carbonfootprints.repository.UserRepository;
 import rs.singidunum.carbonfootprints.service.CarbonService;
@@ -15,7 +15,6 @@ import rs.singidunum.carbonfootprints.service.mediator.UserMediator;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Objects;

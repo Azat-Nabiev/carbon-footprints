@@ -12,7 +12,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.security.web.authentication.logout.LogoutHandler;
-import rs.singidunum.carbonfootprints.controller.filter.JwtAuthenticationFilter;
+import rs.singidunum.carbonfootprints.filter.JwtAuthenticationFilter;
 
 import static org.springframework.security.config.http.SessionCreationPolicy.STATELESS;
 import static rs.singidunum.carbonfootprints.model.enums.Role.ADMIN;

@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 import rs.singidunum.carbonfootprints.controller.dto.response.UserResponseDto;
 import rs.singidunum.carbonfootprints.controller.mapper.UserMapper;
 import rs.singidunum.carbonfootprints.model.User;
-import rs.singidunum.carbonfootprints.model.UserRating;
+import rs.singidunum.carbonfootprints.controller.dto.UserRating;
 import rs.singidunum.carbonfootprints.service.UserService;
 
 import java.util.List;

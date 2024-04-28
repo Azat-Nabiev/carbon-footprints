@@ -26,6 +26,7 @@ import rs.singidunum.carbonfootprints.repository.CarbonRepository;
 import rs.singidunum.carbonfootprints.repository.UserRepository;
 import rs.singidunum.carbonfootprints.service.AddressService;
 import rs.singidunum.carbonfootprints.service.mediator.AddressMediator;
+import rs.singidunum.carbonfootprints.util.CarbonUtil;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
@@ -89,14 +90,24 @@ public class AddressServiceImpl implements AddressService {
 
     @Override
     @Transactional
-    public Address edit(Long id, AddressRequestDto addressRequestDto) {
+    public AddressFullResponseDto edit(Long id, Long userId, AddressFullRequestDto addressRequestDto) {
+        User user = userRepository.findById(userId)
+                                  .orElseThrow(() -> new IllegalStateException("User doesnt exists"));
+
         Address address = addressRepository.findById(id)
                                            .orElseThrow(() ->
                                                    new IllegalStateException(String.format("Cannot find an address by id: %s", id)));
-        address = addressMediator.mediate(address);
+        address = addressMediator.mediate(addressRequestDto, address);
 
-        addressRepository.save(address);
-        return address;
+
+        Address updatedAddress = addressRepository.save(address);
+
+        List<Carbon> carbons = mapToCarbon(updatedAddress, user, addressRequestDto.getCarbon());
+
+        carbonRepository.saveAll(carbons);
+
+        updatedAddress.setCarbon(carbons);
+        return buildAddressFullResponseDto(updatedAddress);
     }
 
     @Override
@@ -224,6 +235,28 @@ public class AddressServiceImpl implements AddressService {
             throw new IllegalStateException("Exception during generating report");
         }
         return outputStream.toByteArray();
+    }
+
+    private List<Carbon> updateCarbon(Address address, List<CarbonCompactDto> carbons) {
+        List<Carbon> carbonList = new ArrayList<>();
+
+        for (CarbonCompactDto carbon : carbons) {
+            Carbon carbonPm = Carbon.builder()
+                                    .address(address)
+                                    .status(EntityStatus.ACTIVE)
+                                    .amount(carbon.getAmount())
+                                    .lastUpdated(LocalDateTime.now())
+                                    .produced(getProducedCarbon(carbon.getCoef(), carbon.getAmount()))
+                                    .coef(CarbonCoef.builder()
+                                                    .id(carbon.getCoef().getId())
+                                                    .name(carbon.getCoef().getName())
+                                                    .build())
+                                    .build();
+
+            carbonList.add(carbonPm);
+        }
+
+        return carbonList;
     }
 
     private List<Carbon> mapToCarbon(Address address, User user, List<CarbonCompactDto> carbons) {

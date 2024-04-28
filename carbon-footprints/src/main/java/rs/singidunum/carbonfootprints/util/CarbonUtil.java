@@ -1,9 +1,9 @@
-package rs.singidunum.carbonfootprints.service.impl;
+package rs.singidunum.carbonfootprints.util;
 
 import org.springframework.stereotype.Service;
 import rs.singidunum.carbonfootprints.model.Carbon;
 import rs.singidunum.carbonfootprints.model.CarbonCoef;
-import rs.singidunum.carbonfootprints.model.ProducedCarbon;
+import rs.singidunum.carbonfootprints.controller.dto.ProducedCarbon;
 
 import java.util.List;
 

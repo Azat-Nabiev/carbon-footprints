@@ -1,4 +1,4 @@
-package rs.singidunum.carbonfootprints.controller.filter;
+package rs.singidunum.carbonfootprints.filter;
 
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;

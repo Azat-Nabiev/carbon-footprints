@@ -16,7 +16,7 @@ import rs.singidunum.carbonfootprints.controller.mapper.CarbonMapper;
 import rs.singidunum.carbonfootprints.controller.dto.request.CarbonRequestDto;
 import rs.singidunum.carbonfootprints.controller.dto.response.CarbonResponseDto;
 import rs.singidunum.carbonfootprints.model.Carbon;
-import rs.singidunum.carbonfootprints.model.ProducedCarbon;
+import rs.singidunum.carbonfootprints.controller.dto.ProducedCarbon;
 import rs.singidunum.carbonfootprints.service.CarbonService;
 
 import java.util.List;

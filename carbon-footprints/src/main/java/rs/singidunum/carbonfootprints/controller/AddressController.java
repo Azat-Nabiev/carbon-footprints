@@ -66,10 +66,11 @@ public class AddressController {
 
     @PutMapping("/{id}")
     @Operation(summary = "Editing an address by ID")
-    public ResponseEntity<AddressСompactResponseDto> edit(@PathVariable(name = "id") Long id,
-                                                          @RequestBody AddressRequestDto addressRequestDto) {
-        Address address = addressService.edit(id, addressRequestDto);
-        return ResponseEntity.ok(addressMapper.mapToCompactAddressResponseDto(address));
+    public ResponseEntity<AddressFullResponseDto> edit(@PathVariable(name = "id") Long id,
+                                                       @RequestHeader("USER_ID") Long userId,
+                                                          @RequestBody AddressFullRequestDto addressRequestDto) {
+        AddressFullResponseDto address = addressService.edit(id, userId, addressRequestDto);
+        return ResponseEntity.ok(address);
     }
 
     @DeleteMapping("/{id}")
