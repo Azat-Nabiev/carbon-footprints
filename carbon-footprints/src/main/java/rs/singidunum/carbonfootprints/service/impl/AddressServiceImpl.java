@@ -100,6 +100,7 @@ public class AddressServiceImpl implements AddressService {
         address = addressMediator.mediate(addressRequestDto, address);
 
 
+        address.getCarbon().forEach(value -> value.setStatus(EntityStatus.ARCHIVED));
         Address updatedAddress = addressRepository.save(address);
 
         List<Carbon> carbons = mapToCarbon(updatedAddress, user, addressRequestDto.getCarbon());
@@ -335,6 +336,9 @@ public class AddressServiceImpl implements AddressService {
     private List<CarbonCompactDto> buildCarbonCompact(List<Carbon> carbons) {
         List<CarbonCompactDto> carbonCompactDtos = new ArrayList<>();
         for (Carbon carbon : carbons) {
+            if (EntityStatus.ARCHIVED.equals(carbon.getStatus())) {
+                continue;
+            }
             CarbonCompactDto carbonCompactDto =
                     CarbonCompactDto.builder().id(carbon.getId())
                                     .amount(carbon.getAmount())
