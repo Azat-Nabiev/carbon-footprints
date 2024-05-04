@@ -151,39 +151,30 @@ public class AddressServiceImpl implements AddressService {
 
             Cell cell = row.createCell(0);
             cell.setCellValue("Id");
-            sheet.autoSizeColumn(0);
 
             cell = row.createCell(1);
             cell.setCellValue("Username");
-            sheet.autoSizeColumn(1);
 
             cell = row.createCell(2);
             cell.setCellValue("Address");
-            sheet.autoSizeColumn(2);
 
             cell = row.createCell(3);
             cell.setCellValue("Building type");
-            sheet.autoSizeColumn(3);
 
             cell = row.createCell(4);
             cell.setCellValue("Postal code");
-            sheet.autoSizeColumn(4);
 
             cell = row.createCell(5);
             cell.setCellValue("Resource");
-            sheet.autoSizeColumn(5);
 
             cell = row.createCell(6);
             cell.setCellValue("Amount");
-            sheet.autoSizeColumn(6);
 
             cell = row.createCell(7);
             cell.setCellValue("Produced");
-            sheet.autoSizeColumn(7);
 
             cell = row.createCell(8);
             cell.setCellValue("Date");
-            sheet.autoSizeColumn(8);
 
 
             for (AddressFullResponseDto address : addresses) {
