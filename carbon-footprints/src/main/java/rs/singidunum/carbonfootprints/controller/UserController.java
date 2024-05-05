@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import rs.singidunum.carbonfootprints.controller.dto.LoggedUser;
 import rs.singidunum.carbonfootprints.controller.dto.response.UserResponseDto;
 import rs.singidunum.carbonfootprints.controller.mapper.UserMapper;
 import rs.singidunum.carbonfootprints.model.User;
@@ -25,8 +26,8 @@ public class UserController {
 
     @GetMapping("/rate/{id}")
     @Operation(summary = "Getting all active user sorted by the produced amount")
-    public ResponseEntity<List<UserRating>> retrieveAll(@PathVariable(value = "id") Long userId) {
-        List<UserRating> users = userService.getAllSorted(userId);
+    public ResponseEntity<LoggedUser> retrieveAll(@PathVariable(value = "id") Long userId) {
+        LoggedUser users = userService.getAllSorted(userId);
         return ResponseEntity.ok(users);
     }
 
@@ -36,18 +37,4 @@ public class UserController {
         User user = userService.getByUserId(userId);
         return ResponseEntity.ok(userMapper.mapToUserResponseDto(user));
     }
-//
-//    @PutMapping("/{id}")
-//    @Operation(summary = "Updating an user by id")
-//    public ResponseEntity<UserResponseDto> edit(@PathVariable(name = "id") Long id, @RequestBody UserRequestDto userRequestDto) {
-//        User user = userService.edit(id, userRequestDto);
-//        return ResponseEntity.ok(userMapper.mapToUserResponseDto(user));
-//    }
-//
-//    @DeleteMapping("/{id}")
-//    @Operation(summary = "Deleting an user by id")
-//    public ResponseEntity<UserResponseDto> delete(@PathVariable(name = "id") Long id) {
-//        User user = userService.delete(id);
-//        return ResponseEntity.ok(userMapper.mapToUserResponseDto(user));
-//    }
 }

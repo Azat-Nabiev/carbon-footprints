@@ -4,6 +4,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import rs.singidunum.carbonfootprints.controller.dto.LoggedUser;
 import rs.singidunum.carbonfootprints.controller.dto.request.UserRequestDto;
 import rs.singidunum.carbonfootprints.model.User;
 import rs.singidunum.carbonfootprints.controller.dto.UserRating;
@@ -30,7 +31,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     @Transactional(readOnly = true)
-    public List<UserRating> getAllSorted(Long userId) {
+    public LoggedUser getAllSorted(Long userId) {
         List<User> users = userRepository.getAllActive();
         return createUserRating(users, userId);
     }
@@ -83,25 +84,30 @@ public class UserServiceImpl implements UserService {
                 .status(EntityStatus.ACTIVE).build();
     }
 
-    private List<UserRating> createUserRating(List<User> users, Long userId) {
+    private LoggedUser createUserRating(List<User> users, Long userId) {
+        LoggedUser loggedUser = new LoggedUser();
         List<UserRating> userRatings = new ArrayList<>();
-        long counter = 0L;
         for (User user : users) {
             UserRating userRating = new UserRating();
             userRating.setId(user.getId());
             userRating.setFirstName(user.getFirstName());
             userRating.setLastName(user.getLastName());
             userRating.setProduced(carbonService.getProducedCarbon(user.getId()).getProduced());
-
-            if (Objects.equals(userId, user.getId())) {
-                userRating.setUsersCurrentPosition(counter);
-            }
-
             userRatings.add(userRating);
+        }
+        userRatings.sort(Comparator.comparingDouble(UserRating::getProduced));
+
+        long counter = 1L;
+        for (UserRating userRating : userRatings) {
+            userRating.setPosition(counter);
+            if (Objects.equals(userId, userRating.getId())) {
+                loggedUser.setLoggedUserPosition(counter);
+                loggedUser.setProducedAmount(userRating.getProduced());
+            }
             counter++;
         }
 
-        userRatings.sort(Comparator.comparingDouble(UserRating::getProduced));
-        return userRatings;
+        loggedUser.setUsersRating(userRatings);
+        return loggedUser;
     }
 }

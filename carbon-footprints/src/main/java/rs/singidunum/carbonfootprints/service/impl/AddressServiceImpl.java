@@ -229,28 +229,6 @@ public class AddressServiceImpl implements AddressService {
         return outputStream.toByteArray();
     }
 
-    private List<Carbon> updateCarbon(Address address, List<CarbonCompactDto> carbons) {
-        List<Carbon> carbonList = new ArrayList<>();
-
-        for (CarbonCompactDto carbon : carbons) {
-            Carbon carbonPm = Carbon.builder()
-                                    .address(address)
-                                    .status(EntityStatus.ACTIVE)
-                                    .amount(carbon.getAmount())
-                                    .lastUpdated(LocalDateTime.now())
-                                    .produced(getProducedCarbon(carbon.getCoef(), carbon.getAmount()))
-                                    .coef(CarbonCoef.builder()
-                                                    .id(carbon.getCoef().getId())
-                                                    .name(carbon.getCoef().getName())
-                                                    .build())
-                                    .build();
-
-            carbonList.add(carbonPm);
-        }
-
-        return carbonList;
-    }
-
     private List<Carbon> mapToCarbon(Address address, User user, List<CarbonCompactDto> carbons) {
         List<Carbon> carbonList = new ArrayList<>();
 

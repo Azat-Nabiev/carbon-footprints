@@ -5,6 +5,7 @@ import rs.singidunum.carbonfootprints.controller.dto.request.AddressFullRequestD
 import rs.singidunum.carbonfootprints.controller.dto.request.AddressRequestDto;
 import rs.singidunum.carbonfootprints.model.Address;
 import rs.singidunum.carbonfootprints.model.Carbon;
+import rs.singidunum.carbonfootprints.model.enums.BuildingType;
 
 @Service
 public class AddressMediator {
@@ -15,6 +16,7 @@ public class AddressMediator {
         address.setHouse(addressRequestDto.getHouse());
         address.setFlat(addressRequestDto.getFlat());
         address.setPostalCode(addressRequestDto.getPostalCode());
+        address.setBuildingType(BuildingType.valueOf(addressRequestDto.getBuildingType()));
         return address;
     }
 }

@@ -5,14 +5,14 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.List;
+
 @Data
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class UserRating {
-    private Long id;
-    private Long position;
-    private String firstName;
-    private String lastName;
-    private Double produced;
+public class LoggedUser {
+    private Long loggedUserPosition;
+    private Double producedAmount;
+    private List<UserRating> usersRating;
 }
