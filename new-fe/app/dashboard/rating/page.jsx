@@ -4,12 +4,15 @@ import { useQuery } from "react-query";
 import { getRating } from "../../service";
 import Pedestal from "../../components/Pedestal";
 import useUser from "../../hooks/useUser";
-
+ 
 export default function Reg() {
   const { id } = useUser();
-  const { data } = useQuery("rating", getRating);
-  const user = data?.find((el) => el.id == id);
-
+  const ratingQuery = useQuery("rating", getRating);
+  const usersList = ratingQuery?.data?.usersRating;
+  const user = Array.isArray(usersList)
+    ? usersList.find((user) => user.id == id)
+    : undefined;
+ 
   return (
     <Container sx={{ p: 2 }}>
       <Typography
@@ -19,17 +22,17 @@ export default function Reg() {
       >
         User score
       </Typography>
-      <Pedestal users={data?.slice(0, 3)} />
+      <Pedestal users={usersList?.slice(0, 3)} />
       <Grid item xs={12} sx={{ mt: 2 }}>
         <Paper sx={{ p: 2, bgcolor: "primary.light", color: "white" }}>
           <Typography>
             {user?.firstName} {user?.lastName} your current position is{" "}
-            {user?.usersCurrentPosition || "unknown"}
+            {user?.position || "unknown"}
           </Typography>
         </Paper>
       </Grid>
       <Grid sx={{ mt: 2 }}>
-        {data?.slice(3).map((user, i) => (
+        {usersList?.slice(3).map((user, i) => (
           <Grid
             key={user.id}
             sx={{
@@ -50,3 +53,4 @@ export default function Reg() {
     </Container>
   );
 }
+ 
