@@ -1,0 +1,35 @@
+{
+  "name": "new-fe",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint"
+  },
+  "dependencies": {
+    "@emotion/cache": "^11.11.0",
+    "@emotion/react": "^11.11.4",
+    "@emotion/styled": "^11.11.5",
+    "@fontsource/space-mono": "^5.0.20",
+    "@mui/icons-material": "^5.15.15",
+    "@mui/lab": "^5.0.0-alpha.170",
+    "@mui/material": "^5.15.15",
+    "@mui/material-nextjs": "^5.15.11",
+    "axios": "^1.6.8",
+    "formik": "^2.4.6",
+    "next": "14.2.3",
+    "react": "^18",
+    "react-dom": "^18",
+    "react-hot-toast": "^2.4.1",
+    "react-query": "^3.39.3",
+    "swr": "^2.2.5"
+  },
+  "devDependencies": {
+    "@types/node": "20.12.7",
+    "eslint": "^8",
+    "eslint-config-next": "14.2.3",
+    "typescript": "5.4.5"
+  }
+}

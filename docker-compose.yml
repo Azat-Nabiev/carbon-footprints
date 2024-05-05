@@ -1,4 +1,4 @@
-version: '3.1'
+version: "3.1"
 
 services:
   postgres:
@@ -28,6 +28,16 @@ services:
       SPRING_DATASOURCE_DRIVER_CLASS_NAME: org.postgresql.Driver
     ports:
       - "8085:8085"
+    networks:
+      - my-network
+  nextjs-service:
+    build:
+      context: ./new-fe
+      dockerfile: Dockerfile
+    container_name: nextjs-app
+    restart: always
+    ports:
+      - "3000:3000"
     networks:
       - my-network
 
