@@ -52,7 +52,7 @@ const AddressLine = ({ el, onAddExpenseClick, onEditClick }) => {
           </Typography>
         </Box>
         <Box>
-          <Button onClick={onAddExpenseClick}>CO2 Expenses</Button>
+          <Button onClick={onAddExpenseClick}>Resources</Button>
           <DeleteButton
             sx={{ opacity: 0.8 }}
             onClick={() => deleteMutation.mutate(el)}

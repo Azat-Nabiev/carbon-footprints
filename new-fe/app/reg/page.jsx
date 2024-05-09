@@ -51,27 +51,27 @@ export default function Reg() {
       <Typography sx={{ fontWeight: 600, mb: 2 }}>Registration</Typography>
       <TextField
         name="firstName"
-        label="firstName"
+        label="First name"
         size="small"
         value={form.values.firstName}
         onChange={form.handleChange}
       />
       <TextField
         name="lastName"
-        label="lastName"
+        label="Last name"
         size="small"
         value={form.values.lastName}
         onChange={form.handleChange}
       />
       <TextField
-        label="email"
+        label="Email"
         name="email"
         size="small"
         value={form.values.email}
         onChange={form.handleChange}
       />
       <TextField
-        label="password"
+        label="Password"
         name="password"
         size="small"
         value={form.values.password}
@@ -83,3 +83,4 @@ export default function Reg() {
     </Paper>
   );
 }
+

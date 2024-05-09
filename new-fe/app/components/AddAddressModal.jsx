@@ -52,7 +52,7 @@ const AddAdressModal = ({ inititalValues, onSubmit, onClose, ...props }) => {
         onSubmit={form.handleSubmit}
       >
         <TextField
-          label="country"
+          label="Country"
           name="country"
           size="small"
           value={form.values.country}
@@ -61,7 +61,7 @@ const AddAdressModal = ({ inititalValues, onSubmit, onClose, ...props }) => {
         <Grid container spacing={1}>
           <Grid item xs={12} md={3}>
             <TextField
-              label="city"
+              label="City"
               name="city"
               size="small"
               value={form.values.city}
@@ -70,7 +70,7 @@ const AddAdressModal = ({ inititalValues, onSubmit, onClose, ...props }) => {
           </Grid>
           <Grid item xs={12} md={3}>
             <TextField
-              label="street"
+              label="Street"
               name="street"
               size="small"
               value={form.values.street}
@@ -79,7 +79,7 @@ const AddAdressModal = ({ inititalValues, onSubmit, onClose, ...props }) => {
           </Grid>
           <Grid item xs={12} md={3}>
             <TextField
-              label="house"
+              label="House"
               name="house"
               size="small"
               value={form.values.house}
@@ -88,7 +88,7 @@ const AddAdressModal = ({ inititalValues, onSubmit, onClose, ...props }) => {
           </Grid>
           <Grid item xs={12} md={3}>
             <TextField
-              label="flat"
+              label="Flat"
               name="flat"
               size="small"
               value={form.values.flat}
@@ -98,7 +98,7 @@ const AddAdressModal = ({ inititalValues, onSubmit, onClose, ...props }) => {
         </Grid>
 
         <TextField
-          label="postalCode"
+          label="Postal code"
           name="postalCode"
           size="small"
           value={form.values.postalCode}
@@ -112,7 +112,7 @@ const AddAdressModal = ({ inititalValues, onSubmit, onClose, ...props }) => {
           value={form.values.buildingType}
           onChange={form.handleChange}
         >
-          <MenuItem value="HOUSE_HOLD">House hold</MenuItem>
+          <MenuItem value="HOUSE_HOLD">Household</MenuItem>
           <MenuItem value="ENTERPRISE">Enterprise</MenuItem>
         </TextField>
         <Button variant="contained" type="submit">

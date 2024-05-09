@@ -22,7 +22,7 @@ const User = ({ user }) => (
       {user.firstName} {user.lastName}
     </Typography>
     <Typography sx={{ whiteSpace: "nowrap", textAlign: "center" }}>
-      (produced: {user.produced})
+      (produced: {user.produced} tons)
     </Typography>
   </Box>
 );

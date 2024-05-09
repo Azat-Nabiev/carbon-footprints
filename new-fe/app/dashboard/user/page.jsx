@@ -42,8 +42,8 @@ const UserPage = () => {
             )}
             {data && (
               <>
-                <Line label="Name" value={data?.name} />
-                <Line label="Lastname" value={data?.lastName} />
+                <Line label="First name" value={data?.name} />
+                <Line label="Last name" value={data?.lastName} />
                 <Line label="Email" value={data?.email} />
                 <Line
                   label="Member since"
@@ -74,7 +74,7 @@ const UserPage = () => {
               >
                 Total produced:{" "}
                 <span style={{ color: "black" }}>
-                  {carbonAmount?.data?.produced}
+                  {carbonAmount?.data?.produced + ' tons'}
                 </span>
                 <br />
                 Your carbon footprint will be erased by{" "}

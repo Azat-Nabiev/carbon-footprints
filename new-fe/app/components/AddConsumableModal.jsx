@@ -88,7 +88,7 @@ const AddConsumableModal = ({ onSubmit, consumablesInitial, ...props }) => {
             </Grid>
             <Grid item>
               <TextField
-                label="amount"
+                label="Amount (tons)"
                 name="amount"
                 size="small"
                 value={amount}
